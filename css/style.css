@@ -1,0 +1,339 @@
+:root {
+    /* カラーパレット */
+    --primary-color: #007bff; /* 主要な青色 */
+    --primary-dark-color: #0056b3; /* 主要な青色のホバー状態 */
+    --accent-color: #28a745; /* 強調色（距離表示など） */
+    --error-color: #dc3545; /* 削除ボタンの赤色 */
+    --error-dark-color: #c82333; /* 削除ボタンのホバー状態 */
+    --text-color: #333; /* 一般的なテキスト色 */
+    --light-text-color: #555; /* 補助的なテキスト色 */
+    --background-light: #f4f7f6; /* ボディの背景色 */
+    --background-white: #fff; /* コンテナの背景色 */
+    --background-info: #e9f5ff; /* コース情報セクションの背景色 */
+    --background-saved: #f9f9f9; /* 登録済みコースセクションの背景色 */
+    --border-color: #ddd; /* 一般的なボーダー色 */
+    --border-light: #eee; /* 薄いボーダー色 */
+    --border-accent: #b3d9ff; /* コース情報セクションのボーダー色 */
+    --border-input: #add8e6; /* 入力フィールドのボーダー色 */
+    --border-list-item: #e0e0e0; /* リストアイテムのボーダー色 */
+    --disabled-color: #cccccc; /* 無効化されたボタンの色 */
+
+    /* スペーシング */
+    --spacing-xs: 8px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 25px;
+    --spacing-xxl: 30px;
+
+    /* シャドウ */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --shadow-input-inset: inset 0 1px 3px rgba(0,0,0,0.05);
+
+    /* ボーダー半径 */
+    --border-radius-sm: 5px;
+    --border-radius-md: 6px;
+    --border-radius-lg: 8px;
+    --border-radius-xl: 10px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: var(--spacing-lg); /* CSS変数を使用*/
+    background-color: var(--background-light); /* CSS変数を使用*/
+    color: var(--text-color); /* CSS変数を使用*/
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 上部に配置 */
+    min-height: 100vh;
+}
+
+.container {
+    background-color: var(--background-white); /* CSS変数を使用*/
+    border-radius: var(--border-radius-xl); /* CSS変数を使用*/
+    box-shadow: var(--shadow-lg); /* CSS変数を使用*/
+    padding: var(--spacing-xxl); /* CSS変数を使用*/
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    color: var(--primary-color); /* CSS変数を使用*/
+    text-align: center;
+    margin-bottom: var(--spacing-xl); /* CSS変数を使用*/
+}
+
+#map {
+    height: 450px;
+    width: 100%;
+    border: 1px solid var(--border-color); /* CSS変数を使用*/
+    border-radius: var(--border-radius-lg); /* CSS変数を使用*/
+    margin-bottom: var(--spacing-xl); /* CSS変数を使用*/
+    box-shadow: var(--shadow-input-inset); /* CSS変数を使用*/
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md); /* CSS変数を使用*/
+    margin-bottom: var(--spacing-xxl); /* CSS変数を使用*/
+}
+
+.controls button,
+#courseInfo button {
+    background-color: var(--primary-color); /* CSS変数を使用*/
+    color: white;
+    border: none;
+    padding: 12px var(--spacing-xl); /* ここは固定値でも良いが、spacing変数を使うなら調整が必要 */
+    border-radius: var(--border-radius-md); /* CSS変数を使用*/
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    flex-grow: 1; /* ボタンが伸びるように */
+    min-width: 120px;
+}
+
+.controls button:hover,
+#courseInfo button:hover {
+    background-color: var(--primary-dark-color); /* CSS変数を使用*/
+    transform: translateY(-2px);
+}
+
+.controls button:disabled,
+#courseInfo button:disabled {
+    background-color: var(--disabled-color); /* CSS変数を使用*/
+    cursor: not-allowed;
+    transform: none;
+}
+
+#courseInfo {
+    background-color: var(--background-info); /* CSS変数を使用*/
+    border: 1px solid var(--border-accent); /* CSS変数を使用*/
+    border-radius: var(--border-radius-lg); /* CSS変数を使用*/
+    padding: var(--spacing-lg); /* CSS変数を使用*/
+    margin-bottom: var(--spacing-xxl); /* CSS変数を使用*/
+    box-shadow: var(--shadow-md); /* CSS変数を使用*/
+}
+
+#courseInfo label {
+    display: block;
+    margin-bottom: var(--spacing-xs); /* CSS変数を使用*/
+    font-weight: bold;
+    color: var(--primary-dark-color); /* CSS変数を使用*/
+}
+
+#courseInfo input[type="text"],
+#courseInfo textarea {
+    width: calc(100% - (var(--spacing-sm) * 2)); /* paddingを考慮 */
+    padding: var(--spacing-sm); /* CSS変数を使用*/
+    margin-bottom: var(--spacing-md); /* CSS変数を使用*/
+    border: 1px solid var(--border-input); /* CSS変数を使用*/
+    border-radius: var(--border-radius-sm); /* CSS変数を使用*/
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+#courseInfo textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+#courseInfo button {
+    margin-top: var(--spacing-md); /* CSS変数を使用*/
+    width: 100%;
+}
+
+#courseDistance,
+#adjustment,
+#courseWalkingTime { /* 3つの要素をまとめてスタイル適用 */
+    font-weight: bold;
+    color: var(--accent-color); /* CSS変数を使用*/
+    font-size: 1.1em;
+}
+
+#savedCourses {
+    background-color: var(--background-saved); /* CSS変数を使用*/
+    border: 1px solid var(--border-light); /* CSS変数を使用*/
+    border-radius: var(--border-radius-lg); /* CSS変数を使用*/
+    padding: var(--spacing-lg); /* CSS変数を使用*/
+    box-shadow: var(--shadow-md); /* CSS変数を使用*/
+}
+
+/* --- 検索コントロールのスタイルを追加 --- */
+.search-controls {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap; /* 小さい画面で折り返す */
+}
+
+#courseSearchInput {
+    flex-grow: 1; /* 入力フィールドが利用可能なスペースを埋める */
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-input);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    box-sizing: border-box;
+    min-width: 150px; /* 最小幅を設定 */
+}
+
+.search-controls button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0; /* ボタンは縮まないようにする */
+}
+
+.search-controls button:hover {
+    background-color: var(--primary-dark-color);
+}
+
+/* クリアボタンの色を少し変えるなど、個別に調整も可能 */
+#courseClearSearchBtn {
+    background-color: #6c757d; /* 灰色 */
+}
+
+#courseClearSearchBtn:hover {
+    background-color: #5a6268;
+}
+
+#courseList {
+    list-style: none;
+    padding: 0;
+}
+
+#courseList li {
+    background-color: var(--background-white);
+    border: 1px solid var(--border-list-item);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease;
+}
+
+#courseList li:hover {
+    transform: translateY(-2px);
+}
+
+#courseList li strong {
+    color: var(--primary-color);
+    font-size: 1.1em;
+}
+
+#courseList li span {
+    font-size: 0.9em;
+    color: var(--light-text-color);
+}
+
+#courseList li .actions button {
+    background-color: var(--error-color);
+    color: white;
+    border: none;
+    padding: var(--spacing-xs) 12px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-left: var(--spacing-sm);
+    transition: background-color 0.3s ease;
+}
+
+#courseList li .actions button:hover {
+    background-color: var(--error-dark-color);
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- 検索コントロールのスタイル (共通) --- */
+.search-controls {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap; /* 小さい画面で折り返す */
+}
+
+/* 地図の上の場所検索コントロールの余白と中央寄せ */
+.map-place-search-controls { /* クラス名を変更 */
+    margin-bottom: var(--spacing-xl); /* 地図との間に少し広めの余白 */
+    justify-content: center; /* 中央寄せ */
+}
+
+/* 入力フィールドの共通スタイル */
+#courseSearchInput, /* 既存のコース検索入力 */
+#placeSearchInput { /* 新しい場所検索入力 */
+    flex-grow: 1; /* 入力フィールドが利用可能なスペースを埋める */
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-input);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    box-sizing: border-box;
+    min-width: 150px; /* 最小幅を設定 */
+}
+
+/* ボタンの共通スタイル */
+.search-controls button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0; /* ボタンは縮まないようにする */
+}
+
+.search-controls button:hover {
+    background-color: var(--primary-dark-color);
+}
+
+/* クリアボタンの共通スタイル */
+#courseClearSearchBtn, /* 既存のコース検索クリア */
+#placeClearSearchBtn { /* 新しい場所検索クリア */
+    background-color: #6c757d; /* 灰色 */
+}
+
+#courseClearSearchBtn:hover,
+#placeClearSearchBtn:hover {
+    background-color: #5a6268;
+}
+
+/* 新規追加: 音声検索ボタンのスタイル */
+#startCourseVoiceSearchBtn,
+#startPlaceVoiceSearchBtn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+#startCourseVoiceSearchBtn:hover,
+#startPlaceVoiceSearchBtn:hover {
+    background-color: var(--primary-dark-color);
+}
+
+#startCourseVoiceSearchBtn:disabled,
+#startPlaceVoiceSearchBtn:disabled {
+    background-color: var(--disabled-color);
+    cursor: not-allowed;
+}
